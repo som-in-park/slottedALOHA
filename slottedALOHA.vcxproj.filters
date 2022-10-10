@@ -15,7 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="myslottedALOHA.c">
+=======
+    <ClCompile Include="myslottedALOHA.cpp">
+>>>>>>> b3c5c10e070728cc60e2e4ae434d7e618158759f
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
