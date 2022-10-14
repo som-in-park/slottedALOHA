@@ -17,7 +17,7 @@ int main() {
 	
 	/*
 	* UE_state
-	* [0]: ÃÊ±â°ª 0 ¼º°ø 100 ÀçÀü¼Û 1~9 ½ÇÆÐ - 100
+	* [0]: ì´ˆê¸°ê°’ 0 ì„±ê³µ 100 ìž¬ì „ì†¡ 1~9 ì‹¤íŒ¨ - 100
 	* [1]: Back-off time
 	*/
 	for (int nUE = 0; nUE < 4; nUE++) {
@@ -34,15 +34,15 @@ int main() {
 			
 			/*
 			* SLOT
-			* E = empty(ÃÊ±â°ª) S = selected C = collision
+			* E = empty(ì´ˆê¸°ê°’) S = selected C = collision
 			*/
 			char* SLOT = (char*)calloc(numofslot, sizeof(char));
 			for (int s = 0; s < numofslot; s++) SLOT[s] = 'E';
 
 			/*
 			* UE_Tx
-			* [0]: UE ¹øÈ£
-			* [1]: ¼±ÅÃÇÑ slot ¹øÈ£
+			* [0]: UE ë²ˆí˜¸
+			* [1]: ì„ íƒí•œ slot ë²ˆí˜¸
 			*/
 			int** UE_Tx = (int**)calloc(UEpertime, sizeof(int*));
 			for (int i = 0; i < UEpertime; i++) {
@@ -50,23 +50,23 @@ int main() {
 			}
 
 
-			// UEº° ½½·Ô Á¤ÇÏ±â
+			// UEë³„ ìŠ¬ë¡¯ ì •í•˜ê¸°
 		
-			for (int ue = 0; ue < UEpertime; ue++) {	// Àü¼Û °¡´ÉÇÑ UE ÃßÃâ
+			for (int ue = 0; ue < UEpertime; ue++) {	// ì „ì†¡ ê°€ëŠ¥í•œ UE ì¶”ì¶œ
 				UE_Tx[ue][0] = -1;
 				for (int i = nextUE; i < numofUE[nUE]; i++) {
-					if (UE_state[i][0] >= 0 && UE_state[i][0] < 10) {	// Àü¼Û °¡´É (0~9)¿©¾ß ÇÔ
-						if (UE_state[i][1] == 0) {	// Back-off time != 0 ÀÏ °æ¿ì Àü¼Û ´ë»ó ¾Æ´Ô 
-							UE_Tx[ue][0] = i;		// Àü¼Û ´ë»óÀ¸·Î ¼³Á¤
-							nextUE = i + 1;			// ÇØ´ç UE ´ÙÀ½ºÎÅÍ Å½»öÇÏµµ·Ï ÀÎµ¦½º ÁöÁ¤
+					if (UE_state[i][0] >= 0 && UE_state[i][0] < 10) {	// ì „ì†¡ ê°€ëŠ¥ (0~9)ì—¬ì•¼ í•¨
+						if (UE_state[i][1] == 0) {	// Back-off time != 0 ì¼ ê²½ìš° ì „ì†¡ ëŒ€ìƒ ì•„ë‹˜ 
+							UE_Tx[ue][0] = i;		// ì „ì†¡ ëŒ€ìƒìœ¼ë¡œ ì„¤ì •
+							nextUE = i + 1;			// í•´ë‹¹ UE ë‹¤ìŒë¶€í„° íƒìƒ‰í•˜ë„ë¡ ì¸ë±ìŠ¤ ì§€ì •
 							break;
 						}
 						else  UE_state[i][1]--;
 					}
 					else UE_state[i][1]--;
-				}// UE ÃßÃâ ¿Ï·á 
+				}// UE ì¶”ì¶œ ì™„ë£Œ 
 
-				if (UE_Tx[ue][0] == -1) continue;	// ÃßÃâµÈ UE ¾øÀ¸¸é ¾Æ·¡ °úÁ¤ »ý·« & ½½·Ô »óÅÂ´Â ÃÊ±â°ª E 
+				if (UE_Tx[ue][0] == -1) continue;	// ì¶”ì¶œëœ UE ì—†ìœ¼ë©´ ì•„ëž˜ ê³¼ì • ìƒëžµ & ìŠ¬ë¡¯ ìƒíƒœëŠ” ì´ˆê¸°ê°’ E 
 
 				int selected = rand() % numofslot;
 				UE_Tx[ue][1] = selected;
@@ -76,10 +76,10 @@ int main() {
 				else
 					SLOT[selected] = 'C';
 
-			} // UEpertime¸¸Å­ Àü¼Û UE ¼±ÅÃ ÈÄ slot ¼±ÅÃ ¿Ï·á
+			} // UEpertimeë§Œí¼ ì „ì†¡ UE ì„ íƒ í›„ slot ì„ íƒ ì™„ë£Œ
 
 
-			// slot collision ¿©ºÎ ÆÄ¾ÇÇØ¼­ Àü¼Û ¼º°ø, ½ÇÆÐ °áÁ¤
+			// slot collision ì—¬ë¶€ íŒŒì•…í•´ì„œ ì „ì†¡ ì„±ê³µ, ì‹¤íŒ¨ ê²°ì •
 			for (int ue = 0; ue < UEpertime; ue++) {
 
 				if (UE_Tx[ue][0] == -1) continue;
@@ -95,11 +95,11 @@ int main() {
 					}
 					UE_state[UE_Tx[ue][0]][0]++;
 
-					//backoff time ÁöÁ¤
+					//backoff time ì§€ì •
 					UE_state[UE_Tx[ue][0]][1] = rand() % numofslot + 1;
 				}
 
-			}// slot collision ¿©ºÎ ÆÄ¾Ç ¿Ï·á
+			}// slot collision ì—¬ë¶€ íŒŒì•… ì™„ë£Œ
 
 
 			for (int i = 0; i < UEpertime; i++) free(UE_Tx[i]);
@@ -113,7 +113,7 @@ int main() {
 			time[nUE]++;
 
 
-		} // while Á¾·á
+		} // while ì¢…ë£Œ
 
 		for (int i = 0; i < numofUE[nUE]; i++) {
 			free(UE_state[i]);
@@ -124,7 +124,7 @@ int main() {
 		result[nUE][1] = total_fail;
 		result[nUE][2] = leftUE;
 
-	} // for numofUE Á¾·á
+	} // for numofUE ì¢…ë£Œ
 
 
 	for (int n = 0; n < 4; n++) {
