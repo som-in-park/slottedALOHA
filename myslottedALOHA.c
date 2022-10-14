@@ -10,7 +10,7 @@ int main() {
 	int numofslot = 8;
 
 	int time[4] = { 0. };
-	int result[4][3] = { 0. };
+	double result[4][4] = { 0. };
 
 	int success, fail, total_success = 0, total_fail = 0, total_sc_count;
 	
@@ -118,7 +118,7 @@ int main() {
 		for (int i = 0; i < numofUE[nUE]; i++) {
 			total_sc_count+= UE_state[i][2];
 		}
-
+		double avg_sc = (double)total_sc_count/total_success;
 
 
 		for (int i = 0; i < numofUE[nUE]; i++) {
@@ -129,13 +129,14 @@ int main() {
 		result[nUE][0] = total_success;
 		result[nUE][1] = total_fail;
 		result[nUE][2] = leftUE;
+		result[nUE][3] = avg_sc;
 
 	} // for numofUE 종료
 
 
 	for (int n = 0; n < 4; n++) {
 		printf("[ UE: %d, slot: %d, UEpertime: %d ]\n", numofUE[n], numofslot, UEpertime);
-		printf("%d, (success: %d, fail: %d, left UE: %d), %f\n", time[n], result[n][0], result[n][1], result[n][2], (double)result[n][0] / numofUE[n]);
+		printf("%d, (success: %.0f, fail: %.0f, left UE: %.0f, success rate: %f), %f\n", time[n], result[n][0], result[n][1], result[n][2], result[n][3], (double)result[n][0] / numofUE[n]);
 		printf("\n");
 	}
 }
