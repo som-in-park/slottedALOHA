@@ -12,7 +12,7 @@ int main() {
 	int time[4] = { 0. };
 	int result[4][3] = { 0. };
 
-	int success, fail, total_success = 0, total_fail = 0;
+	int success, fail, total_success = 0, total_fail = 0, total_sc_count;
 	
 	
 	/*
@@ -25,7 +25,7 @@ int main() {
 		total_success = 0, total_fail = 0;
 
 		int** UE_state = (int**)calloc(numofUE[nUE], sizeof(int*));
-		for (int i = 0; i < numofUE[nUE]; i++) UE_state[i] = (int*)calloc(2, sizeof(int));
+		for (int i = 0; i < numofUE[nUE]; i++) UE_state[i] = (int*)calloc(3, sizeof(int));
 
 
 		while (leftUE > 0) {
@@ -114,6 +114,12 @@ int main() {
 
 
 		} // while 종료
+
+		for (int i = 0; i < numofUE[nUE]; i++) {
+			total_sc_count+= UE_state[i][2];
+		}
+
+
 
 		for (int i = 0; i < numofUE[nUE]; i++) {
 			free(UE_state[i]);
