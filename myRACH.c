@@ -69,11 +69,11 @@ int main() {
     int cnt = 0;
     while (leftUE > 0) {
         for (int s = 0; s < numofsf; s++) {
-            UEpersf = (double)rand() / RAND_MAX * 0.05 * numofUE;
+            UEpersf = numofUE / numofsf;
+            
             candUE += UEpersf;
 
-            printf("SUBFRAME: %d, UE: %d ) leftUE: %d\n", s, (int)UEpersf,
-                   leftUE);
+            printf("SUBFRAME: %d, UE: %d ) leftUE: %d\n", s, (int)UEpersf, leftUE);
 
             if (s == 1 || s == 6) {
                 success = 0, nextUE = 0;
@@ -134,11 +134,11 @@ int main() {
 
                 }  // slot collision 여부 파악 완료
 
-                printf("UE: %d, success: %d\n", candUE, success);
+                printf("UE: %d, success: %d fail:%d\n", candUE, success, fail);
                 leftUE -= success + fail;
             }
         }
         cnt++;
-        // break;
+        break;
     }
 }
