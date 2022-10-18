@@ -14,53 +14,6 @@ int main() {
 
     int success = 0, fail = 0;
 
-    //	int RAO = {1,6};
-    /*
-            for(int nUE=0;nUE<4;nUE++){
-
-                    int** UE_state = (int**)calloc(numofUE, sizeof(int*));
-                    for (int i = 0; i < numofUE; i++) UE_state[i] =
-    (int*)calloc(3, sizeof(int));
-
-                    leftUE =numofUE;
-                    candUE=0;
-                    for(int s=0; s< numofsf; s++){
-                            UEpersf = (double)rand()/RAND_MAX*leftUE;
-                            leftUE -= UEpersf;
-                            candUE += UEpersf;
-
-
-                            if(s==1 ||s==6){
-                                    int** UE_Tx = (int**)
-    calloc(candUE,sizeof(int*)); for(int i =0; i<candUE; i++) UE_Tx[i] =
-    (int*)calloc(2,sizeof(int));
-
-                                    char* PREAMBLE =
-    (char*)calloc(numofpreamble, sizeof(char)); for (int s = 0; s <
-    numofpreamble; s++) PREAMBLE[s] = 'E';
-
-
-                                    for(int c =0; c< candUE; c++){
-                                            int selected = rand()%54;
-                                            UE_Tx[c][1]= selected;
-                                            if (PREAMBLE[selected] == 'E')
-                                            PREAMBLE[selected] = 'S';
-                                    else
-                                            PREAMBLE[selected] = 'C';
-
-                                    }
-                            for (int ue = 0; ue < candUE; ue++) {
-
-                                    if (PREAMBLE[UE_Tx[ue][1]] == 'S') {
-                                            printf("success\n");
-                                    }
-                            }
-                    }
-            }
-
-    }
-    */
-
     int **UE_state = (int **)calloc(numofUE, sizeof(int *));
     for (int i = 0; i < numofUE; i++)
         UE_state[i] = (int *)calloc(3, sizeof(int));
@@ -96,8 +49,7 @@ int main() {
                     for (int i = nextUE; i < numofUE; i++) {
                         if (UE_state[i][0] >= 0 &&
                             UE_state[i][0] < 10) {  // 전송 가능 (0~9)여야 함
-                            if (UE_state[i][1] == 0) {  // Back-off time != 0 일
-                                                        // 경우 전송 대상 아님
+                            if (UE_state[i][1] == 0) {  // Back-off time != 0 일 경우 전송 대상 아님
                                 UE_Tx[ue][0] = i;  // 전송 대상으로 설정
                                 UE_state[i][2]++;
                                 nextUE = i + 1;  // 해당 UE 다음부터 탐색하도록
