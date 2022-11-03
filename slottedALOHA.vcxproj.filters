@@ -15,7 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="myslottedALOHA.c">
+    <ClCompile Include="yakitoki.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="myRACH - 복사본.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
